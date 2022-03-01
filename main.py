@@ -15,14 +15,11 @@ i_intents = discord.Intents.all()
 
 Client = commands.Bot(command_prefix=i_prefix, intents=i_intents)
 
-<<<<<<< HEAD
-=======
 @Client.command()
 async def hi(ctx):
-    await ctx.message.channel.send("Hello, " + ctx.message.author.name + "!")
+    await ctx.message.channel.send(f'Hello, {ctx.message.author.name}!')
 
 
->>>>>>> hi-command
 s_token = os.getenv('BOT_TOKEN') # hidden in .env file (git-ignored)
 
 Client.run(os.getenv('BOT_TOKEN'))
