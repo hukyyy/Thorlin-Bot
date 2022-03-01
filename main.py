@@ -20,11 +20,6 @@ Client = commands.Bot(command_prefix=i_prefix, intents=i_intents)
 
 
 
-
-
-
-
-
 s_token = os.environ.get('BOT_TOKEN') # set an env variable -> export BOT_TOKEN='super sekrit token' <- or something))
 
 await Client.login(token=s_token, bot=True)
