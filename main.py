@@ -10,15 +10,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 i_prefix = '!' # change this
-i_intents = Intents.all()
+i_intents = discord.Intents.all()
 
 Client = commands.Bot(command_prefix=i_prefix, intents=i_intents)
 
-# bot code
-
 s_token = os.getenv('BOT_TOKEN') # hidden in .env file (git-ignored)
 
-await Client.login(token=s_token, bot=True)
-await Client.connect(reconnect=True)
+Client.run(os.getenv('BOT_TOKEN'))
