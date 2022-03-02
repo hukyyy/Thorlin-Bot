@@ -17,7 +17,7 @@ Client = commands.Bot(command_prefix=i_prefix, intents=i_intents)
 
 @Client.command()
 async def hi(ctx, message):
-    await ctx.message.channel.send("Hello, " + ctx.message.author.name + "!")
+    await ctx.message.channel.send(f"Hello, {ctx.message.author.name}!")
 
 
 Client.run(os.getenv('BOT_TOKEN'))
