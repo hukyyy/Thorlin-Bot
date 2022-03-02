@@ -20,4 +20,6 @@ async def hi(ctx, message):
     await message.channel.send(f'Hello, {message.author.name}!')
 
 
+
+
 Client.run(os.getenv('BOT_TOKEN'))
