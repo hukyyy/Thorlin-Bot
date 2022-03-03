@@ -46,4 +46,4 @@ async def chemquiz(ctx):
     else:
         await ctx.message.channel.send(f'Noooooooo.. Answer was \'{a}\'')
 
-Client.run(token=os.getenv('BOT_TOKEN'), bot=True)
+Client.run(os.getenv('BOT_TOKEN'), bot=True)
