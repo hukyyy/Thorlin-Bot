@@ -6,8 +6,10 @@ from discord.ext import tasks
 
 import asyncio
 import os
+import re
 import praw
 import random
+import requests
 from dotenv import load_dotenv
 
 
@@ -37,24 +39,29 @@ async def hi(ctx):
 # - Handle image galleries
 @Client.command()
 async def adventurecat(ctx):
-    posts = []
-    for post in reddit.subreddit("adventurecats").hot(limit = 10):
-        posts.append([post.title, post.author, post.url, post.permalink])
+    posts = [[post.title, post.author, post.url, post.permalink] for post in reddit.subreddit("adventurecats").hot(limit = 50)]
 
-    chosen = random.choice(posts)
-    await ctx.message.channel.send(chosen[2])
+    images = list(filter(lambda p: 'i.redd.it' in p[2], posts))
+    # galleries = list(filter(lambda p: 'gallery' in p[2], posts))
+    #
+    # if galleries:
+    #     s = requests.Session()
+    #     s.headers.update({'User-Agent': 'sex'})
+    #     imglinks = [re.search(r'https:\/\/preview.redd.it\/[a-z0-9]{13}\.jpg', s.get(galleries[i][2]).text).group() for i in range(len(galleries))]
+    #     images += imglinks
+
+    await ctx.message.channel.send(random.choice(images[2]))
 
 @Client.command()
 async def showerthought(ctx):
-    thoughts = []
-    for thought in reddit.subreddit("showerthoughts").hot(limit = 50):
-        thoughts.append([thought.title, thought.author, thought.permalink])
+    thoughts = [[thought.title, thought.author, thought.permalink] for thought in reddit.subreddit("showerthoughts").hot(limit = 50)]
 
     chosen = random.choice(thoughts)
 
     embed = discord.Embed(
         title = chosen[0],
-        description = f'Thought by u/{chosen[1]} on r/showerthoughts'
+        description = f'[Thought]({chosen[2]}) by [u/{chosen[1]}](https://reddit.com/u/{chosen[1]}) on [r/showerthoughts](https://reddit.com/r/showerthoughts)',
+        color = 0xd4f1f9
     )
 
     await ctx.message.channel.send(embed = embed)
