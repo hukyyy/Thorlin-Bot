@@ -44,5 +44,20 @@ async def adventurecat(ctx):
     chosen = random.choice(posts)
     await ctx.message.channel.send(chosen[2])
 
+@Client.command()
+async def showerthought(ctx):
+    thoughts = []
+    for thought in reddit.subreddit("showerthoughts").hot(limit = 50):
+        thoughts.append([thought.title, thought.author, thought.permalink])
+
+    chosen = random.choice(thoughts)
+
+    embed = discord.Embed(
+        title = chosen[0],
+        description = f'Thought by u/{chosen[1]} on r/showerthoughts'
+    )
+
+    await ctx.message.channel.send(embed = embed)
+
 
 Client.run(os.getenv('BOT_TOKEN'))
