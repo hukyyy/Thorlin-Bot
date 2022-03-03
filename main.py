@@ -22,9 +22,10 @@ discord.ext.commands.DefaultHelpCommand.sort_commands = False
 
 Client = commands.Bot(command_prefix=i_prefix, intents=i_intents)
 
+load_dotenv()
+
 @Client.event
 async def on_ready():
-    load_dotenv()
     print(':)')
 
 @Client.command()
