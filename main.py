@@ -82,13 +82,16 @@ async def annoy(ctx, op='start'):
 @Client.listen('on_message')
 async def _annoy(message):
     global annoylist
-    print(message.content, message.author, *annoylist)
-    if message.author in annoylist:
-        if any(list := (w in message.content.lower() for w in _im)):
-            present = [a * b for a, b in zip(list, _im)]
-            msg = message.content.split(' ')[(message.content.split(' ').index(present[0]))]
-            await message.channel.send(f'''Hi {' '.join(msg)}, I\'m dad.''')
-        else:
-            await message.channel.send(''.join(random.choice((str.upper, str.lower))(c) for c in message.content.lower()))
+    if not message.content.startswith('!'):
+        if message.author in annoylist:
+            if any(list := [w in message.content.lower() for w in _im]): # BUG: ValueError: '' is not in list
+                present = [int(a) * b for a, b in zip(list, _im)]
+                print(present)
+                print(message.content.split(' '))
+                print(list)
+                msg = message.content.split(' ')[(message.content.split(' ').index(present[0]))]
+                await message.channel.send(f'''Hi {' '.join(msg)}, I\'m dad.''')
+            else:
+                await message.channel.send(''.join(random.choice((str.upper, str.lower))(c) for c in message.content.lower()))
 
 Client.run(os.getenv('BOT_TOKEN'))
