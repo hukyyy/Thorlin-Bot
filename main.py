@@ -84,13 +84,11 @@ async def _annoy(message):
     global annoylist
     if not message.content.startswith('!'):
         if message.author in annoylist:
-            if any(list := [w in message.content.lower() for w in _im]): # BUG: ValueError: '' is not in list
+            if any(list := [w in message.content.lower() for w in _im]):
                 present = [int(a) * b for a, b in zip(list, _im)]
-                print(present)
-                print(message.content.split(' '))
-                print(list)
-                msg = message.content.split(' ')[(message.content.split(' ').index(present[0]))]
-                await message.channel.send(f'''Hi {' '.join(msg)}, I\'m dad.''')
+                present[:] = [x for x in present if x != '']
+                msg = message.content.split(' ')[(message.content.split(' ').index(present[0])):]
+                await message.channel.send(f'''Hi {' '.join(msg[1:])}, I\'m dad.''')
             else:
                 await message.channel.send(''.join(random.choice((str.upper, str.lower))(c) for c in message.content.lower()))
 
