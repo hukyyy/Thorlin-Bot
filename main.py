@@ -77,7 +77,7 @@ async def annoy(ctx, op='start'):
     elif (op.lower() == 'stop'):
         annoylist.remove(ctx.message.mentions[0])
     else:
-        ctx.send('Didn\'t quite get that :b')
+        await ctx.send('Didn\'t quite get that :b')
 
 @Client.listen('on_message')
 async def _annoy(message):
@@ -87,8 +87,8 @@ async def _annoy(message):
         if any(list := (w in message.content.lower() for w in _im)):
             present = [a * b for a, b in zip(list, _im)]
             msg = message.content.split(' ')[(message.content.split(' ').index(present[0]))]
-            message.channel.send(f'''Hi {' '.join(msg)}, I\'m dad.''')
+            await message.channel.send(f'''Hi {' '.join(msg)}, I\'m dad.''')
         else:
-            message.channel.send(''.join(random.choice((str.upper, str.lower))(c) for c in message.content.lower()))
+            await message.channel.send(''.join(random.choice((str.upper, str.lower))(c) for c in message.content.lower()))
 
 Client.run(os.getenv('BOT_TOKEN'))
