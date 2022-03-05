@@ -63,25 +63,25 @@ async def chemquiz(ctx):
     else:
         await ctx.message.channel.send(f'Noooooooo.. Answer was \'{a}\'')
 
-# !adventurecat TODO
-# - Handle Image galleries
-# - Filter Image posts from Text posts
-# - Make it an embed!
+@Client.command()
+async def meowIRL(ctx):
+    posts = [[post.author, post.url] for post in reddit.subreddit("MEOW_IRL").hot(limit = 51)]
+    posts.remove(posts[0]) # removed the pinned posts
 
-# @Client.command()
-# async def adventurecat(ctx):
-#     posts = [[post.title, post.author, post.url, post.permalink] for post in reddit.subreddit("adventurecats").hot(limit = 50)]
-#
-#     images = list(filter(lambda p: 'i.redd.it' in p[2], posts))
-#     # galleries = list(filter(lambda p: 'gallery' in p[2], posts))
-#     #
-#     # if galleries:
-#     #     s = requests.Session()
-#     #     s.headers.update({'User-Agent': 'sex'})
-#     #     imglinks = [re.search(r'https:\/\/preview.redd.it\/[a-z0-9]{13}\.jpg', s.get(galleries[i][2]).text).group() for i in range(len(galleries))]
-#     #     images += imglinks
-#
-#     await ctx.message.channel.send(random.choice(images[2]))
+    chosen = random.choice(posts)
+
+    embed = discord.Embed(
+        title = "MEOW!"
+    )
+    embed.set_author(
+        name = f'u/{chosen[0]}',
+        url = f'https://reddit.com/u/{chosen[0]}'
+    )
+    embed.set_image(
+        url = chosen[1]
+    )
+
+    await ctx.message.channel.send(embed = embed)
 
 @Client.command()
 async def showerthought(ctx):
