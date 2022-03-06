@@ -2,15 +2,17 @@
 import discord
 from discord.ext import commands
 import random
+import os
+import apis
 
 class showerthought(commands.Cog):
-    def __init__(self, Client, reddit):
+    def __init__(self, Client):
         self.Client = Client
-        self.reddit = reddit
+        self.reddit = apis.apis().reddit
         self.limit = 50 # hot limit
         self.color = 0xd4f1f9
 
-    @commands.Command()
+    @commands.command()
     async def showerthought(self, ctx):
 
         thoughts = [[thought.title, thought.author, thought.permalink] for thought in reddit.subreddit("showerthoughts").hot(limit = self.limit)]
@@ -25,5 +27,5 @@ class showerthought(commands.Cog):
 
         await ctx.send(embed = embed)
 
-def setup(Client, reddit):
-    Client.add_cog(showerthought(Client, reddit))
+def setup(Client):
+    Client.add_cog(showerthought(Client))

@@ -13,6 +13,7 @@ import requests
 from dotenv import load_dotenv
 
 from orgachem import OrgaChem
+import apis
 
 load_dotenv()
 
@@ -26,14 +27,6 @@ discord.ext.commands.DefaultHelpCommand.sort_commands = False
 
 
 Client = commands.Bot(command_prefix=i_prefix, intents=i_intents)
-
-reddit = praw.Reddit(
-client_id = os.getenv('REDDIT_CLIENT_ID'),
-client_secret = os.getenv('REDDIT_CLIENT_SECRET'),
-refresh_token = os.getenv('REDDIT_REFRESH_TOKEN'),
-user_agent = os.getenv('REDDIT_USER_AGENT')
-)
-reddit.read_only = True
 
 @Client.event
 async def on_ready():

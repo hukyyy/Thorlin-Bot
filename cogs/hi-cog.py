@@ -6,7 +6,7 @@ class hi(commands.Cog):
     def __init__(self, Client):
         self.Client = Client
 
-    @commands.Command()
+    @commands.command()
     async def hi(self, ctx):
         await ctx.send(f"Hello, {ctx.message.author.name}!")
 

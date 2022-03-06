@@ -11,7 +11,7 @@ class annoy(commands.Cog):
         self._im = ['im', 'i\'m', 'i am']
 
 
-    @commands.Command(usage='(start|stop) @user')
+    @commands.command(usage='(start|stop) @user')
     async def annoy(self, ctx, op='start'):
         if (op.lower() == 'start'):
             self.annoylist.add(ctx.message.mentions[0])
@@ -31,5 +31,5 @@ class annoy(commands.Cog):
             else:
                 await message.channel.send(''.join(random.choice((str.upper, str.lower)) for c in message.content.lower()))
 
-def init(Client):
+def setup(Client):
     Client.add_cog(annoy(Client))

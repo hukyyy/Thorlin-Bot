@@ -2,19 +2,21 @@
 import discord
 from discord.ext import commands
 import random
+import os
+import apis
 
 class adventurecat(commands.Cog):
 
-    def __init__(self, Client, reddit):
+    def __init__(self, Client):
         self.Client = Client
-        self.reddit = reddit
+        self.reddit = apis.apis().reddit
         self.limit = 50 # hot limit
 
     # Improvements necessary :
     # - Filter image posts
     # - Handle image galleries
 
-    @commands.Command()
+    @commands.command()
     async def adventurecat(self, ctx):
 
         posts = [[post.title, post.author, post.url, post.permalink] for post in reddit.subreddit("adventurecats").hot(limit = self.limit)]
@@ -31,5 +33,5 @@ class adventurecat(commands.Cog):
 
         await ctx.send(random.choice(images[2]))
 
-def setup(Client, reddit):
-    Client.add_cog(adventurecat(Client, reddit))
+def setup(Client):
+    Client.add_cog(adventurecat(Client))

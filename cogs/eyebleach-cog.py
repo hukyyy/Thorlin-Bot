@@ -1,16 +1,17 @@
 #!/usr/bin/python3
 import discord
 from discord.ext import commands
-
 import random
+import os
+import apis
 
 class eyebleach(commands.Cog):
-    def __init__(self, Client, reddit):
+    def __init__(self, Client):
         self.Client = Client
-        self.reddit = reddit
+        self.reddit = apis.apis().reddit
         self.limit = 50 # hot limit
 
-    @commands.Command()
+    @commands.command()
     async def eyebleach(self, ctx):
         posts = [[post.title, post.author, post.url] for post in reddit.subreddit("Eyebleach").hot(limit = self.limit)]
 
@@ -25,5 +26,5 @@ class eyebleach(commands.Cog):
 
         await ctx.send(embed = embed)
 
-def init(Client, reddit):
-    Client.add_cog(eyebleach(Client, reddit))
+def setup(Client):
+    Client.add_cog(eyebleach(Client))

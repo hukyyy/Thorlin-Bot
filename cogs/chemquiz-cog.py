@@ -2,7 +2,6 @@
 import discord
 from discord.ext import commands
 import random
-
 from orgachem import OrgaChem
 
 class chemquiz(commands.Cog):
@@ -12,7 +11,7 @@ class chemquiz(commands.Cog):
         self.values = list(vars(OrgaChem()).values())
 
 
-    @commands.Command()
+    @commands.command()
     async def chemquiz(self, ctx):
         await ctx.send(f'What\'s this functional group called?\n{self.values[(n := random.randint(0, len(self.values)))]}')
         reply = await Client.wait_for('message', check=lambda m: m.author == ctx.message.author and m.channel == ctx.message.channel)
@@ -21,5 +20,5 @@ class chemquiz(commands.Cog):
         else:
             await ctx.message.channel.send(f'Noooooooo.. Answer was \'{a}\'')
 
-def init(Client):
+def setup(Client):
     Client.add_cog(chemquiz(Client))
