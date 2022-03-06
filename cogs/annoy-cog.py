@@ -20,7 +20,7 @@ class annoy(commands.Cog):
         else:
             await ctx.send('Didn\'t quite get that :b')
 
-    @Cog.listener('on_message')
+    @commands.Cog.listener('on_message')
     async def _annoy(self, message):
         if (not message.content.startswith('!') and message.author in self.annoylist):
             if any(list := [w in message.content.lower() for w in self._im]):

@@ -37,14 +37,13 @@ reddit.read_only = True
 
 @Client.event
 async def on_ready():
-    Client.load_extension('cogs.adventurecat-cog')
-    Client.load_extension('cogs.hi-cog')
-    Client.load_extension('cogs.showerthought-cog')
-    Client.load_extension('cogs.annoy-cog')
-    Client.load_extension('cogs.chemquiz-cog')
-    Client.load_extension('cogs.meowIRL-cog')
-    Client.load_extension('cogs.eyebleach-cog')
+    for f in os.listdir('./cogs'):
+    	if f.endswith('.py'):
+            Client.load_extension('cogs.' + f[:-3])
     print(':)')
+
+    # for n, c in Client.cogs:
+    #     print(j.get_commands())
 
 
 Client.run(os.getenv('BOT_TOKEN'))
