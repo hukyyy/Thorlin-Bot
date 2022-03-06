@@ -21,22 +21,19 @@ load_dotenv()
 i_prefix = '!' # change this
 i_intents = discord.Intents.all()
 
-# QOL
-discord.ext.commands.DefaultHelpCommand.no_category = 'General'
-discord.ext.commands.DefaultHelpCommand.sort_commands = False
-
 
 Client = commands.Bot(command_prefix=i_prefix, intents=i_intents)
 
 @Client.event
 async def on_ready():
     for f in os.listdir('./cogs'):
-    	if f.endswith('.py'):
+    	if (f.endswith('.py') and not f.startswith('.')):
             Client.load_extension('cogs.' + f[:-3])
-    print(':)')
 
-    # for n, c in Client.cogs:
-    #     print(j.get_commands())
+    for c in Client.cogs:
+        print(f'loaded {c}')
+    print('-'*10)
+    print(':)')
 
 
 Client.run(os.getenv('BOT_TOKEN'))
