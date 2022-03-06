@@ -27,9 +27,8 @@ class annoy(commands.Cog):
         if (not message.content.startswith('!') and message.author in self.annoylist):
             list = [w in message.content.lower() for w in self._im]
             if any(list):
-                for i in self._im:
-                    text = message.content.replace(i, 'im')
-                msg = message.content.split(' ')[(text.split(' ').index('im')):]
+                text = message.content.lower().replace('i am', 'im').replace('i\'m', 'im')
+                msg = message.content.split(' ')[(text.lower().split(' ').index('im')):]
                 await message.channel.send(f'''Hi {' '.join(msg[1:])}, I\'m dad.''')
             else:
                 await message.channel.send(''.join(random.choice((str.upper, str.lower))(c) for c in message.content.lower()))
