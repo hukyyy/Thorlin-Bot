@@ -7,12 +7,13 @@ class showerthought(commands.Cog):
     def __init__(self, Client, reddit):
         self.Client = Client
         self.reddit = reddit
+        self.limit = 50 # hot limit
         self.color = 0xd4f1f9
 
     @commands.Command()
     async def showerthought(self, ctx):
 
-        thoughts = [[thought.title, thought.author, thought.permalink] for thought in reddit.subreddit("showerthoughts").hot(limit = 50)]
+        thoughts = [[thought.title, thought.author, thought.permalink] for thought in reddit.subreddit("showerthoughts").hot(limit = self.limit)]
 
         chosen = random.choice(thoughts)
 

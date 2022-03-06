@@ -8,6 +8,7 @@ class adventurecat(commands.Cog):
     def __init__(self, Client, reddit):
         self.Client = Client
         self.reddit = reddit
+        self.limit = 50 # hot limit
 
     # Improvements necessary :
     # - Filter image posts
@@ -16,9 +17,9 @@ class adventurecat(commands.Cog):
     @commands.Command()
     async def adventurecat(self, ctx):
 
-        posts = [[post.title, post.author, post.url, post.permalink] for post in reddit.subreddit("adventurecats").hot(limit = 50)]
+        posts = [[post.title, post.author, post.url, post.permalink] for post in reddit.subreddit("adventurecats").hot(limit = self.limit)]
 
-        images = list(filter(lambda p: 'i.redd.it' in p[2], posts))
+        images = list(filter(lambda p: 'i.redd.it' in p[2], posts[:1]))
 
         # galleries = list(filter(lambda p: 'gallery' in p[2], posts))
         #
