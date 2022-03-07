@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 import discord
 from discord.ext import commands
 import random
@@ -10,7 +9,6 @@ class annoy(commands.Cog):
 
         self.annoylist = set()
         self._im = ['im', 'i\'m', 'i am']
-        print(*self._im)
 
 
     @commands.command(usage='(start|stop) @user')

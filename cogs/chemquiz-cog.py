@@ -2,7 +2,7 @@
 import discord
 from discord.ext import commands
 import random
-from orgachem import OrgaChem
+from utils.orgachem import OrgaChem
 
 class chemquiz(commands.Cog):
     def __init__(self, Client):

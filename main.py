@@ -2,18 +2,9 @@
 import discord
 from discord.ext import commands
 from discord.ext import tasks
-
 import asyncio
-import random
 import os
-import re
-import praw
-import random
-import requests
 from dotenv import load_dotenv
-
-from orgachem import OrgaChem
-import apis
 
 load_dotenv()
 
@@ -35,5 +26,9 @@ async def on_ready():
     print('-'*10)
     print(':)')
 
-
-Client.run(os.getenv('BOT_TOKEN'))
+if __name__ == '__main__':
+    try:
+        Client.run(os.getenv('BOT_TOKEN'))
+    finally:
+        for c in Client.cogs:
+            Client.unload_extension(c)
