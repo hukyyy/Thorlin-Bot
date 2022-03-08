@@ -15,7 +15,7 @@ class chemquiz(commands.Cog):
     async def chemquiz(self, ctx):
         await ctx.send(f'What\'s this functional group called?\n{self.values[(n := random.randint(0, len(self.values)))]}')
         reply = await self.Client.wait_for('message', check=lambda m: m.author == ctx.message.author and m.channel == ctx.message.channel)
-        if reply.content.lower() == (a := self.keys[n].lower()):
+        if reply.content.lower() == (a := self.keys[n].lower().replace('_', ' ')):
             await ctx.message.channel.send(f'Yep! Answer was \'{a}\'')
         else:
             await ctx.message.channel.send(f'Noooooooo.. Answer was \'{a}\'')
