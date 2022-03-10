@@ -7,18 +7,26 @@ from utils.orgachem import OrgaChem
 class chemquiz(commands.Cog):
     def __init__(self, Client):
         self.Client = Client
-        self.keys = list(vars(OrgaChem()).keys())
-        self.values = list(vars(OrgaChem()).values())
+        self.OrgaChem = OrgaChem()
+
+    def check(self, m) -> bool:
+        return m.author == ctx.author and m.channel == ctx.channel
 
 
     @commands.command()
     async def chemquiz(self, ctx):
-        await ctx.send(f'What\'s this functional group called?\n{self.values[(n := random.randint(0, len(self.values)))]}')
-        reply = await self.Client.wait_for('message', check=lambda m: m.author == ctx.message.author and m.channel == ctx.message.channel)
-        if reply.content.lower() == (a := self.keys[n].lower().replace('_', ' ')):
-            await ctx.message.channel.send(f'Yep! Answer was \'{a}\'')
+        pick = random.choice(self.OrgaChem.compounds)
+
+        await ctx.send(f'What\'s this functional group called? \n {pick[-1]}')
+
+        reply = await self.Client.wait_for('message', check=self.check())
+
+        answers = pick[0:-2] # -> [english, french*, structure]
+
+        if reply.content.lower() in answers:
+            ctx.send(f'Yep! Answer was \'{answers[0]}\' (\'{answers[1]}\')')
         else:
-            await ctx.message.channel.send(f'Noooooooo.. Answer was \'{a}\'')
+            ctx.send(f'Noooooooo.. Answer was \'{answers[0]}\' (\'{answers[1]}\')')
 
 def setup(Client):
     Client.add_cog(chemquiz(Client))

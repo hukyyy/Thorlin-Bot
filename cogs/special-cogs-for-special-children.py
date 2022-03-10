@@ -15,6 +15,7 @@ class special(commands.Cog):
     async def surfer(self, ctx):
         await self.add_surfer()
         await ctx.send(f'{self.surfers} surfers!')
+        # await ctx.send('fuck u josi')
 
 
 def setup(Client):

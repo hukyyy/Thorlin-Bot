@@ -13,7 +13,7 @@ i_prefix = '!' # change this
 i_intents = discord.Intents.all()
 
 
-Client = commands.Bot(command_prefix=i_prefix, intents=i_intents)
+Client = commands.Bot(command_prefix=commands.when_mentioned_or(i_prefix), intents=i_intents)
 
 @Client.event
 async def on_ready():
