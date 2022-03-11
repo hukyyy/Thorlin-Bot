@@ -1,12 +1,7 @@
 # Thorlin
 A general purpose Discord bot made by [@hukyyy](https://github.com/hukyyy) & [@Lucadoge](https://github.com/Lucadoge) with some help from our friends.
 
-## Current Commands:
-- `!hi` : answers with 'hi, {author}!'
-- `!chemquiz` : Quizzes you on different types of organic compounds
-- `!showerthought` : Grabs a showerthought from [r/showerthoughts](https://reddit.com/r/showerthoughts)
-- `!meowIRL` : Grabs a cat from [r/MEOW_IRL](https://reddit.com/r/MEOW_IRL)
-
-## WIP
-- `!adventurecat` : Grabs an image from [r/adventurecats](https://reddit.com/r/adventurecats)
-- `!annoy (start|stop) @user` : Annoys people by repeating what they sent but wIth RAnDom cAPItAliSaTion / or resorts to the "hi blank, I'm dad" joke
+### Commit guide:
+-add new features in cogs so you can just commit them to main straight away so you can STOP THE OCTOPUS OF BRANCHES FOR THE SWEET LOVE OF LITTLE BABY JESUS.
+-add new apis in the api import so they correctly go in the cogs.
+-if you're working on a cog and want to commit it to main bc your mom is calling you for dinner just put a . in front of the python file so the main script doesnt load that cog.
