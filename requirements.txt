@@ -1,4 +1,7 @@
-discord.py
+discord[voice]
+pynacl
 asyncpraw
 python-dotenv
 requests
+youtube_dl
+ffmpeg
