@@ -9,24 +9,20 @@ class chemquiz(commands.Cog):
         self.Client = Client
         self.OrgaChem = OrgaChem()
 
-    def check(self, m) -> bool:
-        return m.author == ctx.author and m.channel == ctx.channel
-
-
     @commands.command()
     async def chemquiz(self, ctx):
         pick = random.choice(self.OrgaChem.compounds)
 
         await ctx.send(f'What\'s this functional group called? \n {pick[-1]}')
 
-        reply = await self.Client.wait_for('message', check=self.check())
+        reply = await self.Client.wait_for('message', check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
 
-        answers = pick[0:-2] # -> [english, french*, structure]
+        answers = pick[0:-1] # -> [english, french*, structure]
 
         if reply.content.lower() in answers:
-            ctx.send(f'Yep! Answer was \'{answers[0]}\' (\'{answers[1]}\')')
+            await ctx.send(f'Yep! Answer was \'{answers[0]}\' (\'{answers[1]}\')')
         else:
-            ctx.send(f'Noooooooo.. Answer was \'{answers[0]}\' (\'{answers[1]}\')')
+            await ctx.send(f'Noooooooo.. Answer was \'{answers[0]}\' (\'{answers[1]}\')')
 
 def setup(Client):
     Client.add_cog(chemquiz(Client))

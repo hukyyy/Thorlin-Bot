@@ -43,7 +43,7 @@ class subreddits(commands.Cog):
         refresh_token=self.refresh_token,
         user_agent=self.user_agent) as reddit:
 
-            self.reddit.read_only = True
+            reddit.read_only = True
             subreddit = await reddit.subreddit('adventurecats', fetch=True)
             posts = []
 
@@ -77,9 +77,9 @@ class subreddits(commands.Cog):
         refresh_token=self.refresh_token,
         user_agent=self.user_agent) as reddit:
 
-            self.reddit.read_only = True
+            reddit.read_only = True
 
-            subreddit = await self.reddit.subreddit('eyebleach', fetch=True)
+            subreddit = await reddit.subreddit('eyebleach', fetch=True)
             posts = []
 
             async for post in subreddit.hot(limit = self.limit):
@@ -103,9 +103,9 @@ class subreddits(commands.Cog):
         refresh_token=self.refresh_token,
         user_agent=self.user_agent) as reddit:
 
-            self.reddit.read_only = True
+            reddit.read_only = True
 
-            subreddit = await self.reddit.subreddit('MEOW_IRL', fetch=True)
+            subreddit = await reddit.subreddit('MEOW_IRL', fetch=True)
             posts = []
 
             async for post in subreddit.hot(limit = self.limit):
@@ -127,9 +127,9 @@ class subreddits(commands.Cog):
         refresh_token=self.refresh_token,
         user_agent=self.user_agent) as reddit:
 
-            self.reddit.read_only = True
+            reddit.read_only = True
 
-            subreddit = await self.reddit.subreddit('showerthoughts', fetch=True)
+            subreddit = await reddit.subreddit('showerthoughts', fetch=True)
             posts = []
 
             async for post in subreddit.hot(limit = self.limit):
