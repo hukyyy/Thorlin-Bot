@@ -65,7 +65,7 @@ class music(commands.Cog):
     @commands.command(aliases=['l'])
     async def leave(self, ctx):
         global queue
-        await self.stop()
+        await self.stop(ctx)
         await ctx.voice_client.disconnect()
         queue = []
 
