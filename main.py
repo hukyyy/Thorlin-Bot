@@ -23,6 +23,7 @@ async def on_ready():
 
     for c in Client.cogs:
         print(f'loaded {c}')
+    print('\033[3;37;40m https://discord.com/oauth2/authorize?client_id=948226934825967647&permissions=8&scope=bot \u001b[0m')
     print('-'*10)
     print(':)')
 
